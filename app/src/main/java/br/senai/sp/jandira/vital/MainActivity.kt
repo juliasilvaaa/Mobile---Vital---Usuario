@@ -25,6 +25,7 @@ import br.senai.sp.jandira.vital.screens.TelaAdicionarCartao
 import br.senai.sp.jandira.vital.screens.TelaAlterarSenha
 import br.senai.sp.jandira.vital.screens.TelaCadastro
 import br.senai.sp.jandira.vital.screens.TelaChamada
+import br.senai.sp.jandira.vital.screens.TelaConfirmacao
 import br.senai.sp.jandira.vital.screens.TelaEspecialidadesFav
 import br.senai.sp.jandira.vital.screens.TelaFavoritos
 import br.senai.sp.jandira.vital.screens.TelaHome
@@ -35,6 +36,7 @@ import br.senai.sp.jandira.vital.screens.TelaInicio
 import br.senai.sp.jandira.vital.screens.TelaLogin
 import br.senai.sp.jandira.vital.screens.TelaMedicos
 import br.senai.sp.jandira.vital.screens.TelaPerfil
+import br.senai.sp.jandira.vital.screens.TelaSuporte
 import br.senai.sp.jandira.vital.screens.TelaTelemedicina
 import br.senai.sp.jandira.vital.ui.theme.VitalTheme
 
@@ -64,6 +66,8 @@ class MainActivity : ComponentActivity() {
 
 
                     composable(route = "telaProcesso") { ProcessoDoPagamento(controleDeNavegacao) }
+                    composable(route = "telaConfirmacao") { TelaConfirmacao(controleDeNavegacao)
+                    }
 
 
 
@@ -82,6 +86,8 @@ class MainActivity : ComponentActivity() {
                         val horarioSelecionado = backStackEntry.arguments?.getString("horarioSelecionado")
                         MetodosDePagamento(controleDeNavegacao, horarioSelecionado = horarioSelecionado)
                     }
+
+
 
 
 
@@ -121,6 +127,18 @@ class MainActivity : ComponentActivity() {
                     composable(route = "telaNotificacoes") {
                         TelaAdicionarCartao() // Substitua com a tela correta
                     }
+
+
+//                    Tela Suporte
+                    composable(
+                        route = "telaSuporte/{idUsuario}",
+                        arguments = listOf(navArgument("idUsuario") { type = NavType.IntType })
+                    ) { backStackEntry ->
+                        val idUsuario = backStackEntry.arguments?.getInt("idUsuario") ?: 0
+                        TelaSuporte(controleDeNavegacao, idUsuario)
+                    }
+
+
 
 
 

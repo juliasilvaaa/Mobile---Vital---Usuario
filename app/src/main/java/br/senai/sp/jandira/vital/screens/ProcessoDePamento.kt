@@ -10,16 +10,15 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -300,13 +299,15 @@ fun ProcessoDoPagamento(controleDeNavegacao: NavHostController) {
                 Spacer(modifier = Modifier.height(60.dp))
 
                 Button(
-                    onClick = { /* TODO */ },
+                    onClick = {
+                        controleDeNavegacao.navigate("telaConfirmacao")
+                    },
                     modifier = Modifier
                         .height(58.dp)
                         .width(326.dp)
                         .align(Alignment.CenterHorizontally)
                         .background(
-                            color = Color.White, // Cor de fundo
+                            color = Color(0xFF2954C7), // Cor de fundo
                             shape = RoundedCornerShape(20.dp) // Cantos arredondados
                         )
                         .border(
@@ -319,7 +320,10 @@ fun ProcessoDoPagamento(controleDeNavegacao: NavHostController) {
                     ),
                     shape = RoundedCornerShape(20.dp)
                 ) {
-
+                    Text(
+                        "Feito",
+                        color = Color.White
+                    )
 
                 }
 

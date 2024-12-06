@@ -220,6 +220,7 @@ fun TelaHome(controleDeNavegacao: NavHostController, idUsuario: Int) {
                                     "Médicos" -> controleDeNavegacao.navigate("telaMedicos/$idUsuario")
                                     "Galeria" -> controleDeNavegacao.navigate("telaGaleria")
                                     "Consultas" -> controleDeNavegacao.navigate("telaHistorico/$idUsuario")
+                                    "Suporte" -> controleDeNavegacao.navigate("telaSuporte/$idUsuario")
                                 }
                             },
                         colors = if (item.selecionado == true) CardDefaults.cardColors(containerColor = Color(0xFF2954C7))
