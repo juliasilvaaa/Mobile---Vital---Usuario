@@ -130,13 +130,13 @@ class MainActivity : ComponentActivity() {
 
 
 //                    Tela Suporte
-                    composable(
-                        route = "telaSuporte/{idUsuario}",
-                        arguments = listOf(navArgument("idUsuario") { type = NavType.IntType })
-                    ) { backStackEntry ->
-                        val idUsuario = backStackEntry.arguments?.getInt("idUsuario") ?: 0
-                        TelaSuporte(controleDeNavegacao, idUsuario)
-                    }
+//                    composable(
+//                        route = "telaSuporte/{idUsuario}",
+//                        arguments = listOf(navArgument("idUsuario") { type = NavType.IntType })
+//                    ) { backStackEntry ->
+//                        val idUsuario = backStackEntry.arguments?.getInt("idUsuario") ?: 0
+//                        TelaSuporte("controleDeNavegacao, idUsuario)
+//                    }
 
 
 
