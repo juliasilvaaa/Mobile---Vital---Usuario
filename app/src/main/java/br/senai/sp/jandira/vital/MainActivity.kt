@@ -15,7 +15,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import br.senai.sp.jandira.vital.screens.GaleriaDeVideos
 import br.senai.sp.jandira.vital.screens.HistoricoDeConsultas
 import br.senai.sp.jandira.vital.screens.InfoEspecialidade
 import br.senai.sp.jandira.vital.screens.InfoMedico
@@ -35,6 +34,7 @@ import br.senai.sp.jandira.vital.screens.TelaInicial3
 import br.senai.sp.jandira.vital.screens.TelaInicio
 import br.senai.sp.jandira.vital.screens.TelaLogin
 import br.senai.sp.jandira.vital.screens.TelaMedicos
+import br.senai.sp.jandira.vital.screens.TelaNotificacoes
 import br.senai.sp.jandira.vital.screens.TelaPerfil
 import br.senai.sp.jandira.vital.screens.TelaSuporte
 import br.senai.sp.jandira.vital.screens.TelaTelemedicina
@@ -65,10 +65,20 @@ class MainActivity : ComponentActivity() {
 
 
 
-                    composable(route = "telaProcesso") { ProcessoDoPagamento(controleDeNavegacao) }
-                    composable(route = "telaConfirmacao") { TelaConfirmacao(controleDeNavegacao)
+                    composable(
+                        route = "telaProcesso/{idUsuario}",
+                        arguments = listOf(navArgument("idUsuario") { type = NavType.IntType })
+                    ) { backStackEntry ->
+                        val idUsuario = backStackEntry.arguments?.getInt("idUsuario") ?: 0
+                        ProcessoDoPagamento(controleDeNavegacao, idUsuario)
                     }
-
+                    composable(
+                        route = "telaConfirmacao/{idUsuario}",
+                        arguments = listOf(navArgument("idUsuario") { type = NavType.IntType })
+                    ) { backStackEntry ->
+                        val idUsuario = backStackEntry.arguments?.getInt("idUsuario") ?: 0
+                        TelaConfirmacao(controleDeNavegacao, idUsuario)
+                    }
 
 
                     composable(
@@ -84,7 +94,8 @@ class MainActivity : ComponentActivity() {
                         arguments = listOf(navArgument("horarioSelecionado") { type = NavType.StringType })
                     ) { backStackEntry ->
                         val horarioSelecionado = backStackEntry.arguments?.getString("horarioSelecionado")
-                        MetodosDePagamento(controleDeNavegacao, horarioSelecionado = horarioSelecionado)
+                        val idUsuario = backStackEntry.arguments?.getInt("idUsuario") ?: 0
+                        MetodosDePagamento(controleDeNavegacao, horarioSelecionado = horarioSelecionado, idUsuario)
                     }
 
 
@@ -124,23 +135,22 @@ class MainActivity : ComponentActivity() {
 
 
                     // Tela Notificações
-                    composable(route = "telaNotificacoes") {
-                        TelaAdicionarCartao() // Substitua com a tela correta
+                    composable(
+                        route = "telaNotificacoes/{idUsuario}",
+                        arguments = listOf(navArgument("idUsuario") { type = NavType.IntType })
+                    ) { backStackEntry ->
+                        val idUsuario = backStackEntry.arguments?.getInt("idUsuario") ?: 0
+                        TelaNotificacoes(controleDeNavegacao, idUsuario)
                     }
 
-
-//                    Tela Suporte
-//                    composable(
-//                        route = "telaSuporte/{idUsuario}",
-//                        arguments = listOf(navArgument("idUsuario") { type = NavType.IntType })
-//                    ) { backStackEntry ->
-//                        val idUsuario = backStackEntry.arguments?.getInt("idUsuario") ?: 0
-//                        TelaSuporte("controleDeNavegacao, idUsuario)
-//                    }
-
-
-
-
+//                // Tela Suporte
+                    composable(
+                        route = "telaSuporte/{idUsuario}",
+                        arguments = listOf(navArgument("idUsuario") { type = NavType.IntType })
+                    ) { backStackEntry ->
+                        val idUsuario = backStackEntry.arguments?.getInt("idUsuario") ?: 0
+                        TelaSuporte(controleDeNavegacao, idUsuario)
+                    }
 
 
                     // Agendamento

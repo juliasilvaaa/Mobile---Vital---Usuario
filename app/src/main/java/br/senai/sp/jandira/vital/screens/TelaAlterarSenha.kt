@@ -2,6 +2,7 @@ package br.senai.sp.jandira.vital.screens
 
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -77,6 +78,9 @@ fun TelaAlterarSenha(controleDeNavegacao: NavHostController) {
                     modifier = Modifier
                         .align(Alignment.CenterStart) // Alinha à esquerda, centralizado verticalmente
                         .padding(start = 16.dp) // Adiciona um espaçamento à esquerda
+                        .clickable {
+                            controleDeNavegacao.navigate("telaPerfil")
+                        }
                 )
                 Text(
                     "Alterar Senha",

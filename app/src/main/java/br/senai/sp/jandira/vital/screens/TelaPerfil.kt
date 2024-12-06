@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.vital.screens
 
+import android.icu.text.SimpleDateFormat
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -33,12 +34,23 @@ import coil.compose.AsyncImage
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.Locale
 
 @Composable
 fun TelaPerfil(controleDeNavegacao: NavHostController, idUsuario: Int) {
     // Variáveis de estado
     var user by remember { mutableStateOf<Usuario?>(null) }
 
+    val dataNascimentoOriginal = user?.data_nascimento ?: "Data de nascimento não disponível"
+
+    val dataNascimentoFormatada = if (dataNascimentoOriginal != "Data de nascimento não disponível") {
+        val formatoOriginal = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+        val formatoDesejado = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        val data = formatoOriginal.parse(dataNascimentoOriginal)
+        formatoDesejado.format(data)
+    } else {
+        dataNascimentoOriginal
+    }
     // Requisição da API
     LaunchedEffect(key1 = idUsuario) {
         val callUsuario = RetrofitFactory()
@@ -77,6 +89,18 @@ fun TelaPerfil(controleDeNavegacao: NavHostController, idUsuario: Int) {
                     .fillMaxWidth()
                     .height(250.dp)
             ) {
+                // Icon clicável para voltar
+                Icon(
+                    imageVector = Icons.Filled.ArrowBack,
+                    contentDescription = "Voltar",
+                    tint = Color.White,
+                    modifier = Modifier
+                        .align(Alignment.CenterStart)
+                        .padding(start = 16.dp)
+                        .clickable {
+                            controleDeNavegacao.navigate("telaHome/$idUsuario")
+                        }
+                )
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center,
@@ -119,7 +143,7 @@ fun TelaPerfil(controleDeNavegacao: NavHostController, idUsuario: Int) {
                     Pair(Icons.Filled.Person, user?.nome ?: "Nome não disponível"),
                     Pair(Icons.Filled.AccountBox, user?.cpf ?: "CPF não disponível"),
                     Pair(Icons.Filled.Email, user?.email ?: "E-mail não disponível"),
-                    Pair(Icons.Filled.DateRange, user?.data_nascimento ?: "Data de nascimento não disponível"),
+                    Pair(Icons.Filled.DateRange, dataNascimentoFormatada),
                     Pair(Icons.Filled.Lock, "Alterar Senha"),
                     Pair(Icons.Filled.Notifications, "Ativar Notificações"),
                     Pair(Icons.Filled.ExitToApp, "Sair")

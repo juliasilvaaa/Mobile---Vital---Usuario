@@ -133,7 +133,7 @@ fun TelaInicial3(controleDeNavegacao: NavHostController) {
                                 // Botão para Voltar (à esquerda)
                                 Button(
                                     onClick = {
-                                        controleDeNavegacao.navigate("telaInicial2")
+                                        controleDeNavegacao.navigate("telaInicial1")
                                     },
                                     modifier = Modifier,
                                     colors = ButtonDefaults.buttonColors(

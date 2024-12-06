@@ -27,6 +27,10 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -38,12 +42,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import br.senai.sp.jandira.vital.R
+import br.senai.sp.jandira.vital.model.Usuario
 import br.senai.sp.jandira.vital.ui.theme.VitalTheme
 
 @Composable
 fun TelaConfirmacao(
-    controleDeNavegacao: NavHostController
+    controleDeNavegacao: NavHostController,
+    idUsuario: Int
 ) {
+
     VitalTheme {
         Surface {
             Column(
@@ -218,7 +225,7 @@ fun TelaConfirmacao(
                     // Botão Feito no rodapé da tela
                     Button(
                         onClick = {
-                            controleDeNavegacao.navigate("telaHistorico")
+                            controleDeNavegacao.navigate("telaHome/$idUsuario")
                         },
                         modifier = Modifier
                             .height(50.dp)

@@ -120,7 +120,7 @@ fun TelaInicial1(controleDeNavegacao: NavHostController) {
                         ) {
                             Button(
                                 onClick = {
-                                    controleDeNavegacao.navigate("telaInicial2")
+                                    controleDeNavegacao.navigate("telaInicial3")
                                 },
                                 modifier = Modifier
                                     .align(Alignment.CenterEnd),  // Alinha o botão à direita

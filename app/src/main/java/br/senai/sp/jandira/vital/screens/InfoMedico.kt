@@ -1,6 +1,7 @@
 package br.senai.sp.jandira.vital.screens
 
 import android.util.Log
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -19,12 +20,14 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.R
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -37,6 +40,8 @@ import coil.compose.AsyncImage
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 
 @Composable
@@ -49,7 +54,7 @@ fun StarRating(rating: Int) {
                     Icon(
                         imageVector = Icons.Filled.Star,
                         contentDescription = "Estrela cheia",
-                        tint = Color(0xFF0174DE),
+                        tint = Color(0xFFFFC700),
                         modifier = Modifier.size(20.dp)
                     )
                 }
@@ -58,7 +63,7 @@ fun StarRating(rating: Int) {
                     Icon(
                         imageVector = Icons.Filled.Star, // Substitua por um ícone de meia estrela, se disponível
                         contentDescription = "Meia estrela",
-                        tint = Color(0xFF0174DE),
+                        tint = Color(0xFFFFC700),
                         modifier = Modifier.size(20.dp)
                     )
                 }
@@ -78,6 +83,8 @@ fun StarRating(rating: Int) {
 
 @Composable
 fun InfoMedico(controleDeNavegacao: NavHostController, idMedico: String?) {
+
+
     val idMedicoInt = idMedico?.toIntOrNull() ?: 0
 
     var medic by remember { mutableStateOf<Medicos?>(null) }
@@ -130,9 +137,16 @@ fun InfoMedico(controleDeNavegacao: NavHostController, idMedico: String?) {
             }
 
         })
+
+
     }
 
+
+
+
+
     VitalTheme {
+
         Surface {
             Column{
                 // Cabeçalho com informações do médico
@@ -171,11 +185,14 @@ fun InfoMedico(controleDeNavegacao: NavHostController, idMedico: String?) {
                         )
                         medic?.let {
                             Text(
-                                text = "Dr. ${it.nome_medico}"
+                                text = "Dr. ${it.nome_medico}",
+                                fontWeight = FontWeight.Bold,
+                                color = Color.Black
                             )
 
                             Text(
-                                text = it.especialidade
+                                text = it.especialidade,
+                                color = Color(0xFFA09C9C)
                             )
                         }
 
@@ -188,6 +205,12 @@ fun InfoMedico(controleDeNavegacao: NavHostController, idMedico: String?) {
                             val mediaNotas = avaliacoes.map { it.avaliacao_nota }.average()
                             val mediaNotasArredondada = "%.1f".format(mediaNotas).toDouble()
 
+                            Image(
+                                painter = painterResource(id = br.senai.sp.jandira.vital.R.drawable.estrelaazul),
+                                contentDescription = "Estrela Azul",
+                                modifier = Modifier
+                                    .size(16.dp)
+                            )
 
                             // Exibir o texto da média e quantidade de avaliações
                             Text(
@@ -218,7 +241,7 @@ fun InfoMedico(controleDeNavegacao: NavHostController, idMedico: String?) {
                 Text(
                     text = "Sobre",
                     fontWeight = FontWeight.Bold,
-                    color = Color.Black
+                    color = Color(0xFF565454)
                 )
                 medic?.let {
                     Text(
@@ -232,7 +255,8 @@ fun InfoMedico(controleDeNavegacao: NavHostController, idMedico: String?) {
                     text = "${avaliacoes.size} Avaliações",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(top = 16.dp)
+                    modifier = Modifier.padding(top = 16.dp),
+                    color = Color(0xFF565454)
                 )
 
 
@@ -248,7 +272,7 @@ fun InfoMedico(controleDeNavegacao: NavHostController, idMedico: String?) {
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(10.dp)
-                            .height(350.dp)
+                            .height(320.dp)
                     ) {
                         items(avaliacoes) { avaliacao ->
                             Card(
@@ -256,28 +280,44 @@ fun InfoMedico(controleDeNavegacao: NavHostController, idMedico: String?) {
                                 colors = CardDefaults.cardColors(Color(0xFFC6E1FF)),
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .height(180.dp)
+                                    .height(150.dp)
                                     .padding(10.dp)
                             ) {
                                 Column (
                                     modifier = Modifier
                                         .fillMaxSize()
-                                        .padding(4.dp)
-
+                                        .padding(10.dp)
                                 ){
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.SpaceBetween
+                                    ){
+                                        Text(
+                                            text = avaliacao.avaliador_nome,
+                                            fontSize = 16.sp,
+                                            fontWeight = FontWeight.Bold
+                                        )
+                                        StarRating(rating = avaliacao.avaliacao_nota)
+                                    }
+
+                                    val dataAvaliacaoOriginal = avaliacao.avaliacao_data
+
+                                    val dataAvaliacaoFormatada = if (dataAvaliacaoOriginal != null) {
+                                        val formatoOriginal = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+                                        val formatoDesejado = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                                        val data = formatoOriginal.parse(dataAvaliacaoOriginal)
+                                        formatoDesejado.format(data)
+                                    } else {
+                                        "Data não disponível"
+                                    }
+
                                     Text(
-                                        text = avaliacao.avaliador_nome,
-                                        fontSize = 16.sp,
-                                        fontWeight = FontWeight.Bold
-                                    )
-                                    Text(
-                                        text = "Data: ${avaliacao.avaliacao_data}",
+                                        text = "Data: $dataAvaliacaoFormatada",
                                         fontSize = 12.sp,
-                                        color = Color.Gray,
+                                        color =Color.Gray,
                                         modifier = Modifier.padding(top = 4.dp),
                                         textAlign = TextAlign.End
                                     )
-                                    StarRating(rating = avaliacao.avaliacao_nota)
 
                                     Text(
                                         text = avaliacao.avaliacao_comentario,
@@ -294,9 +334,7 @@ fun InfoMedico(controleDeNavegacao: NavHostController, idMedico: String?) {
 
                 Column(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .padding(36.dp), // Espaçamento interno nas bordas
-                    verticalArrangement = Arrangement.Bottom, // Move o conteúdo para a parte inferior
+                        .fillMaxSize(),
                     horizontalAlignment = Alignment.CenterHorizontally // Centraliza horizontalmente
                 ) {
                     Button(
@@ -304,7 +342,6 @@ fun InfoMedico(controleDeNavegacao: NavHostController, idMedico: String?) {
                             controleDeNavegacao.navigate("telaAgendamento/${medic?.id_medico}")
                         },
                         modifier = Modifier
-                            .height(46.dp)
                             .width(300.dp)
                             .height(50.dp)
                             .background(

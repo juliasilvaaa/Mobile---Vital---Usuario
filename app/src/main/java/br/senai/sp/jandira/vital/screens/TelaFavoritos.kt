@@ -47,7 +47,7 @@ fun TelaFavoritos(controleDeNavegacao: NavHostController, idUsuario: Int) {
                 val navItemList = listOf(
                     NavItem("Ínicio", Icons.Default.Home, "telaHome/$idUsuario"),
                     NavItem("Favoritos", Icons.Default.Star, "telaFavoritos/$idUsuario"),
-                    NavItem("Notificações", Icons.Default.Notifications, "telaNotificacoes")
+                    NavItem("Notificações", Icons.Default.Notifications, "telaNotificacoes/$idUsuario")
                 )
 
                 var selectedIndex by rememberSaveable { mutableStateOf(1) }
@@ -74,7 +74,6 @@ fun TelaFavoritos(controleDeNavegacao: NavHostController, idUsuario: Int) {
                 .fillMaxSize()
                 .padding(bottom = innerPadding.calculateBottomPadding()) // Tirando o espaco antes do conteúdo
         ){
-
             // Conteudo Tela Favoritos
             Surface {
                 Box(

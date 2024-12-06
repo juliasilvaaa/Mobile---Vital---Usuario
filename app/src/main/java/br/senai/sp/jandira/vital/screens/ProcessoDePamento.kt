@@ -4,10 +4,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -35,7 +38,10 @@ import br.senai.sp.jandira.vital.ui.theme.VitalTheme
 
 
 @Composable
-fun ProcessoDoPagamento(controleDeNavegacao: NavHostController) {
+fun ProcessoDoPagamento(
+    controleDeNavegacao: NavHostController,
+    idUsuario: Int
+) {
 
 
     VitalTheme {
@@ -59,9 +65,6 @@ fun ProcessoDoPagamento(controleDeNavegacao: NavHostController) {
                     modifier = Modifier
                         .align(Alignment.CenterStart)
                         .padding(start = 16.dp)
-                        .clickable {
-                            controleDeNavegacao.navigate("telaInicio")
-                        }
                 )
                 Text(
                     "Pagamento",
@@ -71,23 +74,17 @@ fun ProcessoDoPagamento(controleDeNavegacao: NavHostController) {
                     modifier = Modifier
                         .align(Alignment.Center) // Centraliza no meio
                 )
-
-
             }
-
 
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 160.dp), // Preenche a tela toda
-                contentAlignment = Alignment.Center // Alinha o conteúdo da Box no centro da tela
+                    .padding(top = 200.dp),
+                contentAlignment = Alignment.Center
             ) {
 
                 Row(
                     modifier = Modifier
-
-//                    .padding(top = 150.dp, start = 30.dp)
-
                 ) {
 
                     Column(
@@ -100,7 +97,7 @@ fun ProcessoDoPagamento(controleDeNavegacao: NavHostController) {
                             )
                     ) {
                         Image(
-                            painter = painterResource(R.drawable.transferencia),
+                            painter = painterResource(R.drawable.dinheiroca),
                             contentDescription = "",
                             modifier = Modifier
                                 .width(50.dp)
@@ -131,12 +128,12 @@ fun ProcessoDoPagamento(controleDeNavegacao: NavHostController) {
                             .width(55.dp)
                             .height(55.dp)
                             .background(
-                                color = Color(0xff2954C7),
+                                color = Color(0xFFD9D9D9),
                                 shape = RoundedCornerShape(360.dp)
                             )
                     ) {
                         Image(
-                            painter = painterResource(R.drawable.carregadobranco),
+                            painter = painterResource(R.drawable.carregando),
                             contentDescription = "",
                             modifier = Modifier
                                 .width(50.dp)
@@ -166,12 +163,12 @@ fun ProcessoDoPagamento(controleDeNavegacao: NavHostController) {
                             .width(55.dp)
                             .height(55.dp)
                             .background(
-                                color = Color(0xffD9D9D9),
+                                color = Color(0xFF2954C7),
                                 shape = RoundedCornerShape(360.dp)
                             )
                     ) {
                         Image(
-                            painter = painterResource(R.drawable.transferenciaazul),
+                            painter = painterResource(R.drawable.feito),
                             contentDescription = "",
                             modifier = Modifier
                                 .width(45.dp)
@@ -187,8 +184,7 @@ fun ProcessoDoPagamento(controleDeNavegacao: NavHostController) {
             Column(
                 modifier = Modifier
                     .padding(top = 280.dp)
-                    .width(800.dp)
-                    .height(500.dp)
+                    .fillMaxSize()
                     .border(
                         width = 6.dp, // Largura da borda
                         color = Color(0x80E3E3E3), // Cor da borda
@@ -226,7 +222,7 @@ fun ProcessoDoPagamento(controleDeNavegacao: NavHostController) {
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
-                        "R$ 120.00",
+                        "R$ 90.00",
                         fontWeight = FontWeight.SemiBold,
                         fontSize = 24.sp,
                         color = Color.White,
@@ -235,97 +231,148 @@ fun ProcessoDoPagamento(controleDeNavegacao: NavHostController) {
                     )
                 }
 
-                Spacer(modifier = Modifier.height(14.dp))
+                Spacer(modifier = Modifier.height(20.dp))
 
                 Column(
                     modifier = Modifier
-                        .padding(start = 17.dp, top = 17.dp)
+                        .padding(18.dp)
+                        .fillMaxWidth()
+                        .fillMaxSize()
                 ) {
-                    Text(
-                        "ID da transferência",
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = Color.Gray
-                    )
-
-                    Spacer(modifier = Modifier.height(14.dp))
-
-                    Text(
-                        "Status",
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = Color.Gray
-                    )
-
-                    Spacer(modifier = Modifier.height(14.dp))
-
-                    Text(
-                        "valor da Transferêrencia",
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = Color.Gray
-                    )
-
-                    Spacer(modifier = Modifier.height(14.dp))
-
-                    Text(
-                        "Data",
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = Color.Gray
-                    )
-
-                    Spacer(modifier = Modifier.height(14.dp))
-
-                    Text(
-                        "Hora",
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = Color.Gray
-                    )
-
-                    Spacer(modifier = Modifier.height(14.dp))
-
-                    Text(
-                        "Forma de Pagamento",
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = Color.Gray
-                    )
-
-
-                }
-
-                Spacer(modifier = Modifier.height(60.dp))
-
-                Button(
-                    onClick = {
-                        controleDeNavegacao.navigate("telaConfirmacao")
-                    },
-                    modifier = Modifier
-                        .height(58.dp)
-                        .width(326.dp)
-                        .align(Alignment.CenterHorizontally)
-                        .background(
-                            color = Color(0xFF2954C7), // Cor de fundo
-                            shape = RoundedCornerShape(20.dp) // Cantos arredondados
+                    Row (
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ){
+                        Text(
+                            "ID da transferência",
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = Color.Gray
                         )
-                        .border(
-                            width = 2.dp, // Largura da borda
-                            color = Color(0xffE3E3E3), // Cor da borda
-                            shape = RoundedCornerShape(20.dp) // A mesma forma da borda
-                        ),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.Transparent // Transparente para ver o fundo aplicado com .background
-                    ),
-                    shape = RoundedCornerShape(20.dp)
-                ) {
-                    Text(
-                        "Feito",
-                        color = Color.White
-                    )
+                        Text(
+                            "00000123",
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = Color.Gray
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(14.dp))
+
+                    Row (
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ){
+                        Text(
+                            "Status",
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = Color.Gray
+                        )
+                        Text(
+                            "Recebido",
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = Color.Gray
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(14.dp))
+
+                    Row (
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ){
+                        Text(
+                            "Valor da Transferêrencia",
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = Color.Gray
+                        )
+                        Text(
+                            "R$ 90.00",
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = Color.Gray
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(14.dp))
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            "Data",
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = Color.Gray
+                        )
+                        Text(
+                            "10/12/24",
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = Color.Gray
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(14.dp))
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            "Forma de Pagamento",
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = Color.Gray
+                        )
+                        Text(
+                            "PIX",
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = Color.Gray
+                        )
+                    }
+                    Column (
+                        modifier = Modifier
+                            .padding(top = 200.dp)
+                            .align(Alignment.CenterHorizontally)
+                    ){
+                        Button(
+                            onClick = {
+                                controleDeNavegacao.navigate("telaConfirmacao/$idUsuario")
+                            },
+                            modifier = Modifier
+                                .height(58.dp)
+                                .width(326.dp)
+                                .align(Alignment.CenterHorizontally)
+                                .background(
+                                    color = Color(0xFF2954C7), // Cor de fundo
+                                    shape = RoundedCornerShape(20.dp) // Cantos arredondados
+                                )
+                                .border(
+                                    width = 2.dp, // Largura da borda
+                                    color = Color(0xffE3E3E3), // Cor da borda
+                                    shape = RoundedCornerShape(20.dp) // A mesma forma da borda
+                                ),
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color.Transparent // Transparente para ver o fundo aplicado com .background
+                            ),
+                            shape = RoundedCornerShape(20.dp)
+                        ) {
+                            Text(
+                                "Feito",
+                                color = Color.White
+                            )
+
+                        }
+                    }
 
                 }
+
 
             }
 

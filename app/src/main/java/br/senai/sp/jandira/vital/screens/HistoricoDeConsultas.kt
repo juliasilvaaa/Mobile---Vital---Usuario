@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -29,6 +31,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -66,7 +69,7 @@ fun HistoricoDeConsultas(controleDeNavegacao: NavHostController, idUsuario: Int)
                         .align(Alignment.CenterStart)
                         .padding(start = 16.dp)
                         .clickable {
-                            controleDeNavegacao.navigate("telaInicio/$idUsuario")
+                            controleDeNavegacao.navigate("telaHome/$idUsuario")
                         }
                 )
                 Text(
@@ -104,13 +107,12 @@ fun HistoricoDeConsultas(controleDeNavegacao: NavHostController, idUsuario: Int)
                         .padding(top = 200.dp)
                         .padding(16.dp)
                 ) {
-
                 }
 
                 // Conteúdo rolável
                 LazyColumn(
                     modifier = Modifier
-                        .padding(top = 250.dp, start = 16.dp, end = 16.dp)
+                        .padding(top = 200.dp, start = 16.dp, end = 16.dp)
                         .fillMaxSize()
                 ) {
                     // Próximas Consultas
@@ -124,18 +126,19 @@ fun HistoricoDeConsultas(controleDeNavegacao: NavHostController, idUsuario: Int)
 
                         Card(
                             modifier = Modifier
-                                .height(150.dp)
+                                .height(180.dp)
                                 .fillMaxWidth()
                         ) {
                             Column(
-                                modifier = Modifier.padding(12.dp)
+                                modifier = Modifier
+                                    .padding(12.dp)
                             ) {
                                 Row(
                                     modifier = Modifier.fillMaxWidth(),
                                     horizontalArrangement = Arrangement.SpaceBetween
                                 ) {
                                     Text(
-                                        text = "Especialidade: Ginecologia",
+                                        text = "Especialidade: Cardiologia",
                                         fontSize = 16.sp,
                                         fontWeight = FontWeight.Bold
                                     )
@@ -150,18 +153,52 @@ fun HistoricoDeConsultas(controleDeNavegacao: NavHostController, idUsuario: Int)
                                 }
 
                                 Spacer(modifier = Modifier.height(4.dp))
-                                Text(text = "Médico : Pietra Volpato", color = Color(0xFF0073DE))
-                                Text(text = "Data: 28/08/24", fontWeight = FontWeight.Bold)
+                                Text(text = "Dr. Marcel", color = Color(0xFF0073DE))
+                                Text(text = "Data: 12/12/24", fontWeight = FontWeight.Bold)
+                                Text(text = "Horário: 09:30", fontWeight = FontWeight.Bold)
                             }
+                            Column(
+                                modifier = Modifier
+                                    .padding(10.dp)
+                            ) {
+
+                                Button(
+                                    onClick = {
+                                        /*TODO*/
+                                    },
+                                    modifier = Modifier
+                                        .clip(RoundedCornerShape(30.dp))
+                                        .background(Color(0xFFFAF2AB))
+                                        .size(width = 120.dp, height = 40.dp),
+                                    colors = ButtonDefaults.buttonColors(
+                                        containerColor = Color.Transparent // Para garantir que o gradiente seja visível
+                                    ),
+                                    contentPadding = PaddingValues()
+                                ) {
+                                    Text(
+                                        text = "Em andamento",
+                                        color = Color.Black
+                                    )
+                                }
+                            }
+
                         }
 
                         // Detalhes do card Próxima Consulta
                         if (isCardProximaVisible.value) {
                             DetalhesCard(
-                                titulo = "Detalhes da Próxima Consulta",
-                                descricao = "Informações específicas sobre a consulta futura.",
+                                titulo = "Próxima Consulta",
+                                descricao = "Dr. Marcel - Cardiologia",
+                                data = "12/12/24 - 09:30",
+                                medico = "Agendada com um especialista de cardiologia",
                                 onClose = { isCardProximaVisible.value = false }
                             )
+
+                            Button(onClick = {
+                                controleDeNavegacao.navigate("telaChamada")
+                            }) {
+                                Text("Iniciar")
+                            }
                         }
 
                         Spacer(modifier = Modifier.height(14.dp))
@@ -178,7 +215,7 @@ fun HistoricoDeConsultas(controleDeNavegacao: NavHostController, idUsuario: Int)
 
                         Card(
                             modifier = Modifier
-                                .height(150.dp)
+                                .height(180.dp)
                                 .fillMaxWidth()
                         ) {
                             Column(
@@ -189,7 +226,7 @@ fun HistoricoDeConsultas(controleDeNavegacao: NavHostController, idUsuario: Int)
                                     horizontalArrangement = Arrangement.SpaceBetween
                                 ) {
                                     Text(
-                                        text = "Especialidade: Cardiologia",
+                                        text = "Especialidade: Psicologia",
                                         fontSize = 16.sp,
                                         fontWeight = FontWeight.Bold
                                     )
@@ -204,16 +241,44 @@ fun HistoricoDeConsultas(controleDeNavegacao: NavHostController, idUsuario: Int)
                                 }
 
                                 Spacer(modifier = Modifier.height(4.dp))
-                                Text(text = "Médico : Dr. João Silva", color = Color(0xFF0073DE))
+                                Text(text = "Dr. João Silva", color = Color(0xFF0073DE))
                                 Text(text = "Data: 20/07/24", fontWeight = FontWeight.Bold)
+                                Text(text = "Horário: 16:00", fontWeight = FontWeight.Bold)
                             }
+
+                            Column(
+                                modifier = Modifier
+                                    .padding(10.dp)
+                            ) {
+                                Button(
+                                    onClick = {
+                                        /*TODO*/
+                                    },
+                                    modifier = Modifier
+                                        .clip(RoundedCornerShape(30.dp))
+                                        .background(Color(0xFF3BD038))
+                                        .size(width = 120.dp, height = 40.dp),
+                                    colors = ButtonDefaults.buttonColors(
+                                        containerColor = Color.Transparent // Para garantir que o gradiente seja visível
+                                    ),
+                                    contentPadding = PaddingValues()
+                                ) {
+                                    Text(
+                                        text = "Concluída",
+                                        color = Color.Black
+                                    )
+                                }
+                            }
+
                         }
 
                         // Detalhes do card Consulta Concluída
                         if (isCardConcluidaVisible.value) {
                             DetalhesCard(
                                 titulo = "Consulta Concluída",
-                                descricao = "Esta consulta foi concluída com sucesso. O paciente realizou exames de rotina, incluindo eletrocardiograma e ecocardiograma, que apresentaram resultados normais. Orientações foram dadas para manter hábitos saudáveis, como dieta equilibrada e prática de exercícios regulares. Retorno agendado para acompanhamento em 6 meses.",
+                                descricao = "A consulta de psicologia foi concluída com sucesso. O paciente realizou exames de rotina, incluindo eletrocardiograma e ecocardiograma, que apresentaram resultados normais. Foram dadas orientações para manter hábitos saudáveis, como adotar uma dieta equilibrada e praticar exercícios físicos regularmente. Um retorno foi agendado para acompanhamento em 6 meses.",
+                                data = "20/07/24",
+                                medico = "Especialista em Psicologia",
                                 onClose = { isCardConcluidaVisible.value = false }
                             )
 
@@ -233,7 +298,7 @@ fun HistoricoDeConsultas(controleDeNavegacao: NavHostController, idUsuario: Int)
 
                         Card(
                             modifier = Modifier
-                                .height(150.dp)
+                                .height(180.dp)
                                 .fillMaxWidth()
                         ) {
                             Column(
@@ -244,7 +309,7 @@ fun HistoricoDeConsultas(controleDeNavegacao: NavHostController, idUsuario: Int)
                                     horizontalArrangement = Arrangement.SpaceBetween
                                 ) {
                                     Text(
-                                        text = "Especialidade: Pediatria",
+                                        text = "Especialidade: Ginecologia",
                                         fontSize = 16.sp,
                                         fontWeight = FontWeight.Bold
                                     )
@@ -259,9 +324,34 @@ fun HistoricoDeConsultas(controleDeNavegacao: NavHostController, idUsuario: Int)
                                 }
 
                                 Spacer(modifier = Modifier.height(4.dp))
-                                Text(text = "Médico : Dra. Ana Costa", color = Color(0xFF0073DE))
+                                Text(text = "Dra. Ana Costa", color = Color(0xFF0073DE))
                                 Text(text = "Data: 15/06/24", fontWeight = FontWeight.Bold)
+                                Text(text = "Horário: 18:30", fontWeight = FontWeight.Bold)
                             }
+                            Column(
+                                modifier = Modifier
+                                    .padding(10.dp)
+                            ) {
+                                Button(
+                                    onClick = {
+                                        /*TODO*/
+                                    },
+                                    modifier = Modifier
+                                        .clip(RoundedCornerShape(30.dp))
+                                        .background(Color(0xFFFC4D4D))
+                                        .size(width = 120.dp, height = 40.dp),
+                                    colors = ButtonDefaults.buttonColors(
+                                        containerColor = Color.Transparent // Para garantir que o gradiente seja visível
+                                    ),
+                                    contentPadding = PaddingValues()
+                                ) {
+                                    Text(
+                                        text = "Cancelada",
+                                        color = Color.Black
+                                    )
+                                }
+                            }
+
                         }
 
                         // Detalhes do card Consulta Cancelada
@@ -269,6 +359,8 @@ fun HistoricoDeConsultas(controleDeNavegacao: NavHostController, idUsuario: Int)
                             DetalhesCard(
                                 titulo = "Detalhes da Consulta Cancelada",
                                 descricao = "Motivo do cancelamento: indisponibilidade do médico.",
+                                data = "2I2O",
+                                medico = "Especialista em Ginecologista",
                                 onClose = { isCardCanceladaVisible.value = false }
                             )
                         }
@@ -282,7 +374,7 @@ fun HistoricoDeConsultas(controleDeNavegacao: NavHostController, idUsuario: Int)
 }
 
 @Composable
-fun DetalhesCard(titulo: String, descricao: String, onClose: () -> Unit) {
+fun DetalhesCard(titulo: String, descricao: String, data: String, medico: String, onClose: () -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()

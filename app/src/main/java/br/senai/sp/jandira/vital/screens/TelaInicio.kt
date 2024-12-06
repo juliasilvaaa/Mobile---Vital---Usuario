@@ -28,7 +28,7 @@ fun TelaInicio(controleDeNavegacao: NavHostController, idUsuario: Int) {
     val navItemList = listOf(
         NavItem("Início", Icons.Default.Home, "telaHome/$idUsuario"),
         NavItem("Favoritos", Icons.Default.Star, "telaFavoritos/$idUsuario"),
-        NavItem("Notificações", Icons.Default.Notifications, "telaNotificacoes")
+        NavItem("Notificações", Icons.Default.Notifications, "telaNotificacoes/$idUsuario")
     )
 
     // Estado do índice selecionado na barra
@@ -74,8 +74,9 @@ fun TelaInicio(controleDeNavegacao: NavHostController, idUsuario: Int) {
                     idUsuario = idUsuario
                 )
             }
-            composable("telaNotificacoes") {
-                TelaAdicionarCartao() // Substitua com a tela correta de notificações
+            composable("telaNotificacoes/{idUsuario}") { backStackEntry ->
+                val usuarioId = backStackEntry.arguments?.getString("idUsuario")?.toInt() ?: idUsuario
+                TelaNotificacoes(controleDeNavegacao, usuarioId)
             }
         }
     }

@@ -102,7 +102,7 @@ fun TelaTelemedicina(controleDeNavegacao: NavHostController, idUsuario : Int) {
                     modifier = Modifier
                         .align(Alignment.CenterStart)
                         .padding(start = 16.dp)
-                        .clickable { controleDeNavegacao.navigate("telaInicio/$idUsuario") }
+                        .clickable { controleDeNavegacao.navigate("telaHome/$idUsuario") }
                 )
 
                 // Título
@@ -118,34 +118,6 @@ fun TelaTelemedicina(controleDeNavegacao: NavHostController, idUsuario : Int) {
             Column(
                 modifier = Modifier.padding(top = 180.dp)
             ) {
-                // Campo de Pesquisa
-                OutlinedTextField(
-                    value = "",
-                    onValueChange = {},
-                    modifier = Modifier
-                        .width(360.dp)
-                        .align(Alignment.CenterHorizontally)
-                        .background(Color(0xFFF6F6F6)),
-                    placeholder = {
-                        Text(
-                            text = "Pesquise por especialidade",
-                            color = Color(0xFFA09C9C)
-                        )
-                    },
-                    trailingIcon = {
-                        IconButton(onClick = { }) {
-                            Icon(
-                                imageVector = Icons.Default.Search,
-                                contentDescription = "Buscar",
-                                tint = Color(0xFFA09C9C)
-                            )
-                        }
-                    },
-                    colors = OutlinedTextFieldDefaults.colors(
-                        unfocusedBorderColor = Color.Transparent,
-                        focusedBorderColor = Color.Transparent
-                    )
-                )
 
                 // Lista de Especialidades
                 LazyVerticalGrid(

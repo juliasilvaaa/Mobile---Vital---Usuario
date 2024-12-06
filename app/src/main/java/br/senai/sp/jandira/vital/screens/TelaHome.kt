@@ -121,7 +121,7 @@ fun TelaHome(controleDeNavegacao: NavHostController, idUsuario: Int) {
                 val navItemList = listOf(
                     NavItem("Ínicio", Icons.Default.Home, "telaHome/$idUsuario"),
                     NavItem("Favoritos", Icons.Default.Star, "telaFavoritos/$idUsuario"),
-                    NavItem("Notificações", Icons.Default.Notifications, "telaNotificacoes")
+                    NavItem("Notificações", Icons.Default.Notifications, "telaNotificacoes/$idUsuario")
                 )
 
                 var selectedIndex by rememberSaveable { mutableStateOf(0) }

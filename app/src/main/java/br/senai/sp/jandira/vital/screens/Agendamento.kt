@@ -15,6 +15,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -222,7 +224,7 @@ fun Agendamento(controleDeNavegacao: NavHostController, idMedico: String?) {
                             colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
                         ) {
                             Icon(
-                                Icons.Default.ArrowBack,
+                                Icons.Default.KeyboardArrowLeft,
                                 contentDescription = "Mês Anterior",
                                 tint = Color(0xFF565454)
                             )
@@ -249,7 +251,7 @@ fun Agendamento(controleDeNavegacao: NavHostController, idMedico: String?) {
                             colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
                         ) {
                             Icon(
-                                Icons.Default.ArrowForward,
+                                Icons.Default.KeyboardArrowRight,
                                 contentDescription = "Próximo Mês",
                                 tint = Color(0xFF565454)
                             )
