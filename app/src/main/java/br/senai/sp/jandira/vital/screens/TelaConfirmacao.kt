@@ -225,7 +225,7 @@ fun TelaConfirmacao(
                     // Botão Feito no rodapé da tela
                     Button(
                         onClick = {
-                            controleDeNavegacao.navigate("telaHome/$idUsuario")
+                            controleDeNavegacao.navigate("telaHistorico/$idUsuario")
                         },
                         modifier = Modifier
                             .height(50.dp)

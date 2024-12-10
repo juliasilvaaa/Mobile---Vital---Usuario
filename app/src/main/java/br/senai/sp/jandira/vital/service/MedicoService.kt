@@ -4,6 +4,8 @@ import br.senai.sp.jandira.vital.model.AvaliacaoResponse
 import br.senai.sp.jandira.vital.model.ResultConsultas
 import br.senai.sp.jandira.vital.model.ResultMedico
 import br.senai.sp.jandira.vital.model.ResultMedicos
+import br.senai.sp.jandira.vital.model.ResultadoMedico
+import com.google.android.gms.common.api.Response
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -24,6 +26,6 @@ interface MedicoService {
     @GET("consulta/medico/{id}")
     fun getConsultasMedico(@Path("id") idMedico: String?): retrofit2.Call<ResultConsultas>
 
-
-
+    @GET("/listar/medico/especialidade/{id}")
+    fun getMedicosByEspecialidade(@Path("id") idEspecialidade: Int): Call<ResultadoMedico>
 }

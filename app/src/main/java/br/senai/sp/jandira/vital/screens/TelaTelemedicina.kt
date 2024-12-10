@@ -158,9 +158,7 @@ fun EspecialidadeCard(
             .padding(10.dp)
             .width(150.dp)
             .height(150.dp)
-            .clickable {
-                controleDeNavegacao?.navigate("infoEspecialidade/${especialidade.id_especialidade}")
-            }
+
     ) {
         Box {
             // Imagem da especialidade

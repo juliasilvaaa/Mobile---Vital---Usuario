@@ -32,16 +32,15 @@ class RetrofitFactory {
 
     }
 
-    // Vai gerar o objeto que tem as requisicoes
-    fun getEspecialidadeService(): EspecialidadeService{
+    // Serviço de Especialidades
+    fun getEspecialidadeService(): EspecialidadeService {
         return retrofitFactory.create(EspecialidadeService::class.java)
     }
 
-    // Medicos
-    fun getMedicoService(): MedicoService{
-        return  retrofitFactory.create(MedicoService::class.java)
+    // Serviço de Médicos
+    fun getMedicoService(): MedicoService {
+        return retrofitFactory.create(MedicoService::class.java)
     }
-
 
     // Consultas
     fun getConsultaService(): ConsultaService{

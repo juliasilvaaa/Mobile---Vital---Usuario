@@ -16,7 +16,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import br.senai.sp.jandira.vital.screens.HistoricoDeConsultas
-import br.senai.sp.jandira.vital.screens.InfoEspecialidade
 import br.senai.sp.jandira.vital.screens.InfoMedico
 import br.senai.sp.jandira.vital.screens.MetodosDePagamento
 import br.senai.sp.jandira.vital.screens.ProcessoDoPagamento
@@ -101,8 +100,6 @@ class MainActivity : ComponentActivity() {
 
 
 
-
-
                     composable(
                         route = "telaInicio/{idUsuario}",
                         arguments = listOf(navArgument("idUsuario") { type = NavType.IntType })
@@ -173,13 +170,14 @@ class MainActivity : ComponentActivity() {
                         InfoMedico(controleDeNavegacao, idMedico)
                     }
 
-                    composable(
-                        route = "infoEspecialidade/{id}",
-                        arguments = listOf(navArgument("id") { type = NavType.StringType })
-                    ) { backStackEntry ->
-                        val idEspecialidade = backStackEntry.arguments?.getString("id")
-                        InfoEspecialidade(controleDeNavegacao, idEspecialidade )
-                    }
+//                    composable(
+//                        route = "infoEspecialidade/{idEspecialidade}",
+//                        arguments = listOf(navArgument("idEspecialidade") { type = NavType.IntType })
+//                    ) { backStackEntry ->
+//                        val idEspecialidade = backStackEntry.arguments?.getString("idEspecialidade")
+//                        InfoEspecialidade(controleDeNavegacao, idEspecialidade)
+//                    }
+
 
 
 
